@@ -63,6 +63,28 @@ public class SleepDBManager {
 
     public boolean updatePreference(long p_id, String information){
         ContentValues updateValues = createPreferencesValues(information);
-        return db.update("preferences", updateValues, "p_id =" + p_id, null) > 0;
+        return db.update("preferences", updateValues, "p_id=" + p_id, null) > 0;
+    }
+
+    public boolean updateSession(long session_id, String date){
+        ContentValues updateValues = createSessionsValues(date);
+        return db.update("sessions", updateValues, "session_id=" + session_id, null) > 0;
+    }
+
+    public boolean updateDatapoint(long d_id, long session_id, double datapoint){
+        ContentValues updateValues = createDatapointsValues(session_id, datapoint);
+        return db.update("datapoints", updateValues, "d_id=" + d_id, null) > 0;
+    }
+
+    public boolean deletePreference(long p_id){
+        return db.delete("preferences", "p_id=" + p_id, null) > 0;
+    }
+
+    public boolean deleteSession(long session_id){
+        return db.delete("sessions", "session_id=" + session_id, null) > 0;
+    }
+
+    public boolean deleteDatapoint(long d_id){
+        return db.delete("datapoints", "d_id=" + d_id, null) > 0;
     }
 }
